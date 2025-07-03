@@ -132,7 +132,7 @@ def algoritmo_bfs(mapa, inicio, destino):
 
 
 def mostrar_mapa(mapa):
-    # esta función muestra en consola el mapa con emojis según el tipo de celda
+    
     emojis = {
         0: "⬜",  # camino libre
         1: "🏢",  # edificio
