@@ -5,12 +5,10 @@ from collections import deque  # para usar una cola eficiente
 
 def crear_mapa(filas, columnas):
     # creo una matriz con filas x columnas llena de ceros
-    # cada cero representa un camino libre donde se puede pasar
     return [[0 for _ in range(columnas)] for _ in range(filas)]
 
 def pedir_coordenada_valida(mensaje, filas, columnas):
     # esta función pide al usuario que ingrese una fila y columna válidas
-    # es decir, que estén dentro del rango del mapa (no se salga)
     while True:
         fila = int(input(f"{mensaje} - fila: "))
         columna = int(input(f"{mensaje} - columna: "))
@@ -20,8 +18,7 @@ def pedir_coordenada_valida(mensaje, filas, columnas):
             print("Coordenadas fuera del mapa. intenta de nuevo.")
 
 def inicio_destino(mapa):
-    # esta función pide al usuario las coordenadas de inicio y destino
-    # y luego las marca en el mapa con números especiales para diferenciar
+    
     filas = len(mapa)
     columnas = len(mapa[0])
 
@@ -35,8 +32,7 @@ def inicio_destino(mapa):
     return inicio, destino
 
 def pedir_obstaculos(mapa, inicio, destino):
-    # esta función deja poner obstáculos de distintos tipos en posiciones válidas
-    # verifica que no se pongan encima del inicio, destino o en una coordenada repetida
+   
     filas = len(mapa)
     columnas = len(mapa[0])
 
@@ -69,13 +65,11 @@ def pedir_obstaculos(mapa, inicio, destino):
     return obstaculos
 
 def agregar_obstaculos(mapa, obstaculos):
-    # acá marco en el mapa las posiciones y tipos de obstáculos que pusimos
+    # acá marco en el mapa las posiciones y tipos de obstáculos que se eligieron
     for fila, columna, tipo in obstaculos:
         mapa[fila][columna] = tipo
 
 def algoritmo_bfs(mapa, inicio, destino):
-    # esta función implementa BFS (búsqueda en anchura)
-    # explora por capas, sin prioridad ni heurística, y encuentra el camino más corto (en cantidad de pasos)
 
     cola = deque()  # creo la cola donde guardo nodos por explorar
     cola.append(inicio)  # empiezo desde el nodo inicial
@@ -95,7 +89,7 @@ def algoritmo_bfs(mapa, inicio, destino):
         actual = cola.popleft()  # saco el primero que entró
 
         if actual == destino:
-            # si llegamos al final, reconstruyo el camino desde atrás como siempre
+            # si llego al final, reconstruyo el camino desde atrás como siempre
             camino = []
             while actual in padres:
                 camino.append(actual)
@@ -156,8 +150,6 @@ def mostrar_mapa(mapa):
     time.sleep(0.4)  # hago una pausa para que se vea la animación
 
 def mostrar_camino_animado(mapa, camino, murallas):
-    # acá muestro paso a paso el recorrido que encontró A*
-    # y también voy "rompiendo" muros temporales poco a poco para que desaparezcan
     for i, (fila, col) in enumerate(camino):
         if mapa[fila][col] == 0:
             mapa[fila][col] = 6  # marco el camino en las celdas libres
@@ -175,7 +167,7 @@ def mostrar_camino_animado(mapa, camino, murallas):
         mostrar_mapa(mapa)
 
 def main():
-    # función principal que controla todo el programa
+   
     filas = int(input("ingrese la cantidad de filas: "))
     columnas = int(input("ingrese la cantidad de columnas: "))
 
